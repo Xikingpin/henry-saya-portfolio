@@ -3,14 +3,14 @@ import { reactive, ref } from 'vue'
 
 // Get a free access key at https://web3forms.com (no backend required)
 // and paste it below. Emails will be delivered to sayashikanda@gmail.com.
-const WEB3FORMS_ACCESS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY'
+const WEB3FORMS_ACCESS_KEY = '8a0b2d76-b700-45f9-a91f-77579052ba98'
 
 const form = reactive({ name: '', email: '', message: '' })
 const status = ref('idle') // idle | sending | success | error
 
 const socials = [
   { label: 'LinkedIn', href: 'https://linkedin.com/in/henrysaya' },
-  { label: 'GitHub', href: 'https://github.com/henrysaya' },
+  { label: 'GitHub', href: 'https://github.com/HenrySaya' },
   { label: 'Twitter', href: 'https://twitter.com/henrysaya' },
 ]
 

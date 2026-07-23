@@ -1,78 +1,97 @@
 # Henry Saya — Portfolio
 
-Vue 3 + Vite + Tailwind CSS personal portfolio, built from the PRD.
+A personal portfolio site for Henry Saya, a software engineer based in Kenya
+working across full stack development, systems administration, networking,
+and technical support. Built to showcase projects, highlight core skills,
+and give visitors a fast way to get in touch or download a CV.
 
-## Run it
+**Live site:** https://henrysaya.netlify.app *(update once your final URL is set)*
+
+## Features
+
+- Responsive, accessible layout (semantic HTML, visible focus states,
+  descriptive alt text, 4.5:1+ contrast in both themes)
+- Dark/light theme that follows the OS by default, with a one-click manual
+  override to the opposite look — no three-way toggle to think about
+- Animated project cards with hover previews (image zoom + tech stack overlay)
+- One-click CV download
+- Working contact form (delivered via Web3Forms, no backend required)
+- SEO-ready: Open Graph/Twitter cards, JSON-LD structured data, sitemap,
+  robots.txt
+
+## Tech stack
+
+| Layer      | Choice                              |
+|------------|--------------------------------------|
+| Framework  | Vue 3 (`<script setup>`, Composition API) |
+| Build tool | Vite                                 |
+| Styling    | Tailwind CSS                         |
+| State      | Pinia (theme store)                  |
+| Routing    | Vue Router                           |
+| Forms      | Web3Forms (free, no backend)         |
+| Hosting    | Netlify, deployed from GitHub        |
+
+## Project structure
+
+```
+src/
+├── components/
+│   ├── layout/       Navbar, Footer
+│   ├── sections/      Hero, Marquee, About, Projects, Contact
+│   └── ui/             ProjectCard, ThemeToggle
+├── composables/       useTheme — syncs theme with <html class="dark">
+├── store/             Pinia theme store
+├── router/             Single-route SPA router
+└── views/               HomeView — assembles all sections
+public/
+├── Henry_Saya_CV.pdf   Downloadable CV
+├── images/                Profile badge, project graphics, favicon
+├── robots.txt, sitemap.xml, _redirects
+```
+
+## Getting started
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open the local URL Vite prints (usually http://localhost:5173).
+Open the local URL Vite prints (usually http://localhost:5173).
 
 Build for production:
 
 ```bash
 npm run build
-npm run preview
+npm run preview   # preview the production build locally
 ```
 
-## Things to swap before you ship this
+## Deployment
 
-1. **Photo** — done. `public/images/profile.png` is your real Program Earth
-   Fullstack Fellow badge, wired into the hero circle. `profile.svg` (the old
-   monogram placeholder) is unused now and safe to delete.
-2. **Project screenshots** — `public/images/project-*.svg` are still abstract
-   placeholders (I don't have real screenshots of your projects). Replace them
-   with real screenshots using the same filenames, or update the `image` paths
-   in `src/components/sections/ProjectsSection.vue`.
-3. **Project links** — done. Courier system, Printf, and Simple Shell link to
-   their GitHub repos; Map Dashboard links to `programearth.org/land-sites`.
-4. **Contact form email delivery** — the form currently just logs to console
-   and shows a success message. To actually send you an email:
-   - Go to https://web3forms.com, enter `sayashikanda@gmail.com`, and grab
-     your free Access Key (no signup required).
-   - Paste it into `WEB3FORMS_ACCESS_KEY` in
-     `src/components/sections/ContactSection.vue`.
-5. **Social links** — LinkedIn/GitHub/Twitter URLs in `ContactSection.vue` are
-   still placeholders (`henrysaya`) — update them to your real profiles.
-6. **CV** — `public/Henry_Saya_CV.pdf` is your actual uploaded CV, already
-   wired to the "Download CV" button. Replace this file whenever your CV
-   updates (keep the same filename).
-7. **"33+ Projects Contributed" stat** — in the hero, based on your open
-   source fellowship work. Update the number in `HeroSection.vue` if it
-   changes.
-8. **SEO placeholder domain** — `index.html`, `public/robots.txt`, and
-   `public/sitemap.xml` all currently point to `https://henrysaya.netlify.app/`.
-   Once you know your final live URL (after deploying, or after connecting a
-   custom domain), search-and-replace that placeholder with the real one in
-   all three files, then redeploy.
+This repo is deployed to Netlify, connected directly to the `main` branch —
+every push to `main` triggers an automatic rebuild and redeploy. No manual
+upload step.
 
-## SEO
+Build settings on Netlify:
+- **Build command:** `npm run build`
+- **Publish directory:** `dist`
 
-The site ships with:
-- A descriptive `<title>` and meta description targeting "software engineer",
-  "full stack developer", and "Kenya" search terms.
-- Open Graph and Twitter Card tags so links shared on LinkedIn/Twitter/Slack
-  show a proper preview card (title, description, image).
-- JSON-LD structured data (`Person` schema) so search engines can understand
-  who you are, not just what the page says.
-- `robots.txt` and `sitemap.xml` so search engines can find and index the
-  page.
-- Semantic HTML (`header`, `nav`, `main`, `section`, `footer`) and descriptive
-  `alt` text throughout, which also helps search engines parse the page
-  structure.
+`public/_redirects` and `vercel.json` are included so client-side routing
+(Vue Router's history mode) works correctly on refresh/deep links, on
+Netlify or Vercel respectively.
 
-This is a single-page site, so SEO here mostly means: one page, well
-described, fast, and indexable — there's no multi-page sitemap needed unless
-you add more routes later.
+## Configuration notes
 
-## Notes
+- **Contact form:** delivered through Web3Forms — the access key lives in
+  `src/components/sections/ContactSection.vue`. Get your own key free at
+  [web3forms.com](https://web3forms.com) if you fork this.
+- **Theme:** `src/store/themeStore.js` defaults to `system` and toggles to a
+  locked `manual` state (the opposite of the system look at the moment of
+  toggling). Click again to return to following the system.
+- **SEO URLs:** `index.html`, `public/robots.txt`, and `public/sitemap.xml`
+  reference the live domain directly — update all three if the domain
+  changes.
 
-- Dark mode is the default and follows system preference; manual toggle is in
-  the navbar and persists via `localStorage`.
-- Everything is keyboard-navigable with visible focus rings, semantic HTML
-  landmarks, and descriptive `alt` text on every image.
-- Colors/type are defined in `tailwind.config.js` — `accent-blue` is the
-  primary CTA color, `signal` (teal-green) is used for status indicators.
+## License
+
+Personal project — feel free to use the structure as a reference for your
+own portfolio, but please don't reuse Henry's content, CV, or images as-is.

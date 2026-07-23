@@ -1,28 +1,36 @@
 import { defineStore } from 'pinia'
 
+function systemPrefersDark() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches
+}
+
 export const useThemeStore = defineStore('theme', {
   state: () => ({
-    // 'light' | 'dark' | 'system'
+    // 'system': follow the OS preference.
+    // 'manual': locked to the opposite of whatever the OS preference was
+    //           at the moment the user toggled away from 'system'.
     mode: localStorage.getItem('theme-mode') || 'system',
+    manualIsDark: localStorage.getItem('theme-manual-is-dark') === 'true',
   }),
   getters: {
     isDark(state) {
-      if (state.mode === 'system') {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches
-      }
-      return state.mode === 'dark'
+      if (state.mode === 'system') return systemPrefersDark()
+      return state.manualIsDark
     },
   },
   actions: {
-    setMode(mode) {
-      this.mode = mode
-      localStorage.setItem('theme-mode', mode)
+    toggle() {
+      if (this.mode === 'system') {
+        // Switch to manual, locked to the opposite of the current system look.
+        this.manualIsDark = !systemPrefersDark()
+        this.mode = 'manual'
+      } else {
+        // Switch back to following the system.
+        this.mode = 'system'
+      }
+      localStorage.setItem('theme-mode', this.mode)
+      localStorage.setItem('theme-manual-is-dark', String(this.manualIsDark))
       this.applyToDocument()
-    },
-    cycleMode() {
-      const order = ['dark', 'light', 'system']
-      const next = order[(order.indexOf(this.mode) + 1) % order.length]
-      this.setMode(next)
     },
     applyToDocument() {
       const root = document.documentElement
