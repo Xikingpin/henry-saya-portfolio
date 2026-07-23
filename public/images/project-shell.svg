@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bgS" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A1A1A"/><stop offset="100%" stop-color="#0F0F0F"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgS)"/>
+  <rect x="80" y="70" width="640" height="310" rx="12" fill="#141414" stroke="#242424" stroke-width="2"/>
+  <circle cx="112" cy="98" r="6" fill="#3B82F6" opacity="0.6"/>
+  <circle cx="132" cy="98" r="6" fill="#2DD4A7" opacity="0.6"/>
+  <circle cx="152" cy="98" r="6" fill="#ffffff" opacity="0.2"/>
+  <g font-family="'JetBrains Mono', monospace" font-size="22">
+    <text x="110" y="150" fill="#2DD4A7">$ ./hsh</text>
+    <text x="110" y="190" fill="#3B82F6">(hsh) ls -la</text>
+    <text x="110" y="225" fill="#ffffff" opacity="0.5">drwxr-xr-x  src/</text>
+    <text x="110" y="255" fill="#ffffff" opacity="0.5">-rwxr-xr-x  main.c</text>
+    <text x="110" y="295" fill="#3B82F6">(hsh) _</text>
+  </g>
+  <rect x="205" y="278" width="14" height="26" fill="#3B82F6">
+    <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/>
+  </rect>
+</svg>

@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply font-sans antialiased;
+  @apply bg-portfolio-light text-[#1A1A1A];
+}
+
+html.dark body {
+  @apply bg-portfolio-dark text-white;
+}
+
+/* Visible focus states everywhere — accessibility requirement */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  @apply outline-none ring-2 ring-offset-2 ring-accent-blue ring-offset-portfolio-light dark:ring-offset-portfolio-dark;
+  border-radius: 0.5rem;
+}
+
+::selection {
+  @apply bg-accent-blue/30;
+}
+
+.eyebrow {
+  @apply font-mono text-xs tracking-[0.2em] uppercase text-accent-blue;
+}
+
+.container-page {
+  @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+}
+
+/* Reduced motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
